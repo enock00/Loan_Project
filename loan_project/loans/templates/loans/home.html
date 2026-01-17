@@ -1,0 +1,200 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuickLoan | Landing Page</title>
+  <link rel="stylesheet" href="{% static 'css/home.css' %}?v=2">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+      <div class="logo">
+          <a href="{% url 'home' %}"><strong>QuickLoan</strong></a>
+      </div>
+      <div class="nav-links">
+          <a href="{% url 'home' %}">Home</a>
+          <a href="#loan-products">Loan Products</a>
+          <a href="#loan-calculator">Calculator</a>
+          <a href="#about-us">About Us</a>
+
+          {% if user.is_authenticated %}
+              <a href="{% url 'login' %}">Login</a>
+          {% else %}
+              <a href="{% url 'login' %}">Login</a>
+          {% endif %}
+      </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Fast Loans at Your Fingertips</h1>
+      <p>Apply online and get approved in minutes. QuickLoan is safe, fast, and reliable.</p>
+      <a href="{% url 'apply_loan' %}" class="btn-primary">
+        Apply Now <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
+    <img src="{% static 'images/hero-loan1.png' %}" alt="Happy customer with phone">
+  </section>
+
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <div class="feature">
+      <i class="fa-solid fa-bolt"></i>
+      <h3>Fast Approval</h3>
+      <p>Get your loan approved in just a few minutes without any hassle.</p>
+    </div>
+    <div class="feature">
+      <i class="fa-solid fa-shield-halved"></i>
+      <h3>Secure</h3>
+      <p>Your data is safe with us. We use top-notch security measures.</p>
+    </div>
+    <div class="feature">
+      <i class="fa-solid fa-phone"></i>
+      <h3>24/7 Support</h3>
+      <p>Our support team is always ready to help you whenever you need.</p>
+    </div>
+  </section>
+
+  <!-- About Us -->
+  <section class="about-us fade-in" id="about-us">
+    <div class="about-container">
+      <div class="about-text">
+        <h2><i class="fa-solid fa-building-columns"></i> About QuickLoan</h2>
+        <p class="about-intro">
+          At <strong>QuickLoan</strong>, we make access to loans fast, simple, and transparent.
+        </p>
+        <p>
+          We are a digital-first lending platform designed to remove delays and paperwork.
+          Our technology-driven process ensures fast approvals, secure transactions,
+          and flexible repayment plans.
+        </p>
+
+        <div class="about-values">
+          <div class="value-card">
+            <i class="fa-solid fa-bullseye"></i>
+            <h4>Our Mission</h4>
+            <p>To provide fair, fast, and secure loan solutions.</p>
+          </div>
+          <div class="value-card">
+            <i class="fa-solid fa-eye"></i>
+            <h4>Our Vision</h4>
+            <p>To become a trusted digital financial partner.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-features">
+        <h3>Why Choose Us?</h3>
+        <ul>
+          <li><i class="fa-solid fa-clock"></i> Fast approvals in minutes</li>
+          <li><i class="fa-solid fa-mobile-screen"></i> Easy online application</li>
+          <li><i class="fa-solid fa-lock"></i> Secure & private platform</li>
+          <li><i class="fa-solid fa-hand-holding-dollar"></i> Flexible repayment plans</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Loan Calculator -->
+  <section class="loan-calculator" id="loan-calculator">
+    <div class="calculator-container">
+      <h2><i class="fa-solid fa-calculator"></i> Loan Calculator</h2>
+      <form id="loan-form" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="amount">Loan Amount (KES)</label>
+          <input type="number" id="amount" placeholder="Enter amount" required>
+        </div>
+        <div class="form-group">
+          <label for="interest">Interest Rate (%)</label>
+          <input type="number" id="interest" placeholder="Enter interest rate" required>
+        </div>
+        <div class="form-group">
+          <label for="years">Loan Term (Months)</label>
+          <input type="number" id="years" placeholder="Enter term in months" required>
+        </div>
+        <button type="button" id="calculate-btn">Calculate</button>
+      </form>
+      <div class="results">
+        <h3>Loan Summary</h3>
+        <p>Monthly Payment: <span id="monthly-payment">KES 0</span></p>
+        <p>Total Payment: <span id="total-payment">KES 0</span></p>
+        <p>Total Interest: <span id="total-interest">KES 0</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Loan Products Section -->
+  <section class="loan-products" id="loan-products">
+    <div class="products-container">
+      <h2 class="section-title"><i class="fa-solid fa-sack-dollar"></i> Our Loan Products</h2>
+      <p class="section-subtitle">Flexible loan options designed to meet your financial needs.</p>
+
+      <div class="products-grid">
+        <div class="product-card">
+          <div class="product-icon"><i class="fa-solid fa-user"></i></div>
+          <h3>Personal Loan</h3>
+          <p>Quick cash for emergencies, school fees, or personal expenses.</p>
+          <ul>
+            <li><i class="fa-solid fa-check"></i> Up to KES 100,000</li>
+            <li><i class="fa-solid fa-check"></i> Flexible repayment</li>
+            <li><i class="fa-solid fa-check"></i> Fast approval</li>
+          </ul>
+          <a href="{% url 'apply_loan' %}" class="product-btn">Apply Now</a>
+        </div>
+
+        <div class="product-card popular">
+          <span class="badge">Most Popular</span>
+          <div class="product-icon"><i class="fa-solid fa-briefcase"></i></div>
+          <h3>Business Loan</h3>
+          <p>Grow your business with affordable financing solutions.</p>
+          <ul>
+            <li><i class="fa-solid fa-check"></i> Up to KES 500,000</li>
+            <li><i class="fa-solid fa-check"></i> Low interest rates</li>
+            <li><i class="fa-solid fa-check"></i> Business-friendly terms</li>
+          </ul>
+          <a href="{% url 'apply_loan' %}" class="product-btn">Apply Now</a>
+        </div>
+
+        <div class="product-card">
+          <div class="product-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+          <h3>Education Loan</h3>
+          <p>Invest in your future with affordable education loans.</p>
+          <ul>
+            <li><i class="fa-solid fa-check"></i> Covers tuition & fees</li>
+            <li><i class="fa-solid fa-check"></i> Student-friendly rates</li>
+            <li><i class="fa-solid fa-check"></i> Flexible repayment</li>
+          </ul>
+          <a href="{% url 'apply_loan' %}" class="product-btn">Apply Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 QuickLoan. All rights reserved.</p>
+    <p>
+      <a href="#">Privacy Policy</a> | 
+      <a href="#">Terms of Service</a> | 
+      <a href="#">Contact Us</a>
+    </p>
+  </footer>
+
+<script src="{% static 'js/loan-calculator.js' %}"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+

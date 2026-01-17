@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | QuickLoan</title>
+
+  <link rel="stylesheet" href="{% static 'css/dashboard.css'%}?v=2">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<!-- ===== Top App Header ===== -->
+<header class="app-header">
+  <div class="logo">
+    <i class="fa-solid fa-circle-dollar-to-slot"></i>
+    <span>QuickLoan</span>
+  </div>
+
+  <div class="header-icons">
+    <i class="fa-solid fa-ticket"></i>
+    <i class="fa-solid fa-headset"></i>
+  </div>
+</header>
+
+<!-- ===== Feature Banner ===== -->
+<section class="feature">
+  <span class="badge">Feature</span>
+  <span class="feature-text">Apply Quickly</span>
+</section>
+
+<!-- ===== Loan Card ===== -->
+<section class="loan-card-main">
+  <div class="loan-card-header">
+    <h4>QuickLoan</h4>
+    <span>Borrow Up (KES)</span>
+  </div>
+
+  <div class="loan-amount">
+    50,000
+  </div>
+
+  <p class="reliable">
+    Most Reliable Loan Merchant
+  </p>
+
+  <!-- Stats -->
+  <div class="loan-stats">
+    <div class="stat">
+      <i class="fa-solid fa-thumbs-up"></i>
+      <strong>0.03%</strong>
+      <span>Daily Interest</span>
+    </div>
+
+    <div class="stat">
+      <i class="fa-solid fa-clock"></i>
+      <strong>10 mins</strong>
+      <span>Approval Time</span>
+    </div>
+
+    <div class="stat">
+      <i class="fa-solid fa-calendar"></i>
+      <strong>120 days</strong>
+      <span>Loan Period</span>
+    </div>
+  </div>
+
+  {% if has_pending %}
+    <button class="btn-disabled" disabled>
+      Pending Loan
+    </button>
+  {% else %}
+    <a href="{% url 'apply_loan' %}" class="btn-primary">
+      Get Your Credit Now
+    </a>
+  {% endif %}
+</section>
+
+<!-- ===== Loan Guide ===== -->
+<section class="loan-guide">
+  <h4>Loan Guide</h4>
+
+  <div class="guide-cards">
+    <div class="guide-card">
+      <i class="fa-solid fa-list-check"></i>
+      <h5>How to Apply</h5>
+      <p>Only 3 steps</p>
+    </div>
+
+    <div class="guide-card">
+      <i class="fa-solid fa-wallet"></i>
+      <h5>How to Repay</h5>
+      <p>Easy Repayment</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Bottom Navigation ===== -->
+<nav class="bottom-nav">
+  <a href="#" class="active">
+    <i class="fa-solid fa-house"></i>
+    <span>Home</span>
+  </a>
+
+  <a href="#">
+    <i class="fa-solid fa-file-invoice"></i>
+    <span>Bills</span>
+  </a>
+
+  <a href="{% url 'profile' %}">
+    <i class="fa-solid fa-user"></i>
+    <span>Profile</span>
+  </a>
+</nav>
+
+</body>
+</html>
+
+
+

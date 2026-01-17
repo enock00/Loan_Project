@@ -1,0 +1,265 @@
+/* ===============================
+   RESET & GLOBAL
+================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  background: #f4f6fb;
+  color: #333;
+  padding-bottom: 80px; /* space for bottom nav */
+}
+
+/* ===============================
+   APP HEADER
+================================ */
+.app-header {
+  background: #ffffff;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #2b6cff;
+}
+
+.logo i {
+  font-size: 22px;
+}
+
+.header-icons i {
+  font-size: 18px;
+  margin-left: 15px;
+  color: #555;
+}
+
+/* ===============================
+   FEATURE BANNER
+================================ */
+.feature {
+  margin: 12px 15px;
+  background: #eaf1ff;
+  padding: 10px 15px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.feature .badge {
+  background: #2b6cff;
+  color: #fff;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 20px;
+}
+
+.feature-text {
+  font-size: 14px;
+  color: #333;
+}
+
+/* ===============================
+   MAIN LOAN CARD
+================================ */
+.loan-card-main {
+  margin: 15px;
+  padding: 20px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #2b6cff, #1a4ed8);
+  color: #ffffff;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+.loan-card-header h4 {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.loan-card-header span {
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+.loan-amount {
+  font-size: 36px;
+  font-weight: 800;
+  margin: 15px 0;
+}
+
+.reliable {
+  text-align: center;
+  font-size: 13px;
+  opacity: 0.9;
+  margin-bottom: 15px;
+}
+
+/* ===============================
+   LOAN STATS
+================================ */
+.loan-stats {
+  display: flex;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 12px;
+  border-radius: 14px;
+  margin-bottom: 15px;
+}
+
+.stat {
+  text-align: center;
+  width: 33%;
+}
+
+.stat i {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.stat strong {
+  display: block;
+  font-size: 14px;
+}
+
+.stat span {
+  font-size: 11px;
+  opacity: 0.9;
+}
+
+/* ===============================
+   BUTTONS
+================================ */
+.btn-primary {
+  display: block;
+  text-align: center;
+  background: linear-gradient(135deg, #27d5ff, #00b3e6);
+  color: #ffffff;
+  padding: 14px;
+  border-radius: 30px;
+  font-weight: 700;
+  text-decoration: none;
+  margin-top: 10px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn-disabled {
+  width: 100%;
+  background: #9aa7c1;
+  color: #fff;
+  border: none;
+  padding: 14px;
+  border-radius: 30px;
+  font-weight: 700;
+  cursor: not-allowed;
+}
+
+/* ===============================
+   LOAN GUIDE
+================================ */
+.loan-guide {
+  margin: 20px 15px;
+}
+
+.loan-guide h4 {
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.guide-cards {
+  display: flex;
+  gap: 12px;
+}
+
+.guide-card {
+  background: #ffffff;
+  padding: 15px;
+  border-radius: 14px;
+  flex: 1;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+}
+
+.guide-card i {
+  font-size: 22px;
+  color: #2b6cff;
+  margin-bottom: 8px;
+}
+
+.guide-card h5 {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.guide-card p {
+  font-size: 12px;
+  color: #777;
+}
+
+/* ===============================
+   BOTTOM NAVIGATION
+================================ */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #ffffff;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  border-top: 1px solid #e5e5e5;
+}
+
+.bottom-nav a {
+  text-decoration: none;
+  color: #777;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.bottom-nav i {
+  font-size: 18px;
+}
+
+.bottom-nav a.active {
+  color: #2b6cff;
+}
+
+.app-wrapper {
+  max-width: 420px;
+  min-height: 100vh;
+  margin: 0 auto;
+  background: #f4f6fb;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.12);
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  body {
+    background: linear-gradient(135deg, #e8ecf5, #dfe5f1);
+  }
+}
+
+
+
+
+

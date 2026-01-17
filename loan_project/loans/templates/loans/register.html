@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuickLoan | Register</title>
+  <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+</head>
+<body>
+<div class="auth-container">
+  <div class="auth-card">
+    <h2>Create an Account</h2>
+    <p>Fill in your details to register</p>
+
+    <form id="registerForm" method="POST" action="{% url 'dashboard' %}">
+      {% csrf_token %}
+
+      <!-- Full Name -->
+      <input type="text" name="full_name" placeholder="Full Name" required>
+
+      <!-- Email -->
+      <input type="email" name="email" placeholder="Email" required>
+
+      <!-- Phone Number -->
+      <input type="tel" name="phone" placeholder="Phone Number" required>
+
+      <!-- 8-Digit ID Number -->
+      <input type="text" name="id_no" placeholder="8-digit ID Number" pattern="\d{8}" required>
+
+      <!-- Password -->
+      <input type="password" name="password1" placeholder="Password" required>
+
+      <!-- Confirm Password -->
+      <input type="password" name="password2" placeholder="Confirm Password" required>
+
+      <!-- Fee Note -->
+      <div class="fee-note">A small application fee may apply after registration.</div>
+
+      <button type="submit">Register</button>
+    </form>
+
+    <div class="switch">
+      Already have an account? <a href="{% url 'login' %}">Login here</a>
+    </div>
+
+    <div id="messages"></div>
+  </div>
+</div>
+
+</body>
+</html>
+
+
+
+
+

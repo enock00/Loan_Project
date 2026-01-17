@@ -1,0 +1,200 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apply for Loan | QuickLoan</title>
+  <link rel="stylesheet" href="{% static 'css/apply_loan.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+</head>
+<body>
+
+<div class="loan-container">
+  <div class="form-wrapper">
+    <h2>Apply for a Loan</h2>
+    <p>Fill in your loan details below</p>
+
+    {% if messages %}
+      <div class="messages">
+        {% for message in messages %}
+          <p class="message {{ message.tags }}">{{ message }}</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <!-- Loan Form -->
+    <form id="loanForm">
+      {% csrf_token %}
+
+      <!-- Full Name -->
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" name="full_name" required placeholder="Joe Doe">
+      </div>
+
+      <div class="form-group">
+        <label>ID Number</label>
+        <input type="text" name="id_number" required placeholder="12345678">
+      </div>
+
+      <!-- Phone -->
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="text" name="phone" required placeholder="2547XXXXXXXX">
+      </div>
+
+      <!-- Loan Details (hidden until fee is paid) -->
+      <div id="loanDetails" style="display:none;">
+        <!-- Loan Amount -->
+        <div class="form-group">
+          <label>Loan Amount (KES)</label>
+          <input type="number" name="amount" required>
+        </div>
+
+        <!-- Purpose -->
+        <div class="form-group">
+          <label>Purpose</label>
+          <select name="purpose" required>
+            <option value="">Select purpose</option>
+            <option value="business">Business</option>
+            <option value="education">Education</option>
+            <option value="personal">Personal</option>
+            <option value="medical">Medical</option>
+            <option value="emergency">Emergency</option>
+          </select>
+        </div>
+
+        <!-- Duration -->
+        <div class="form-group">
+          <label>Duration (Months)</label>
+          <select name="duration" required>
+            <option value="">Select duration</option>
+            <option value="3">3 Months</option>
+            <option value="6">6 Months</option>
+            <option value="12">12 Months</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn-primary">Submit Loan</button>
+      </div>
+
+      <!-- Fee Agreement -->
+      <div class="form-group fee-check" id="feeCheck">
+        <label>
+          <input type="checkbox" id="fee-confirm" required>
+          I agree to pay the application fee of <strong>KES 1</strong>
+        </label>
+      </div>
+
+      <button type="button" class="btn-primary" id="applyFeeBtn">Pay Application Fee</button>
+    </form>
+  </div>
+</div>
+
+<!-- M-Pesa Card -->
+<div class="mpesa-card" id="mpesaCard" style="display:none;">
+  <div class="mpesa-content">
+    <i class="fa-solid fa-mobile-screen-button mpesa-icon"></i>
+    <h3>Pay Application Fee</h3>
+    <p>To proceed, pay KES 1 via M-Pesa on your phone.</p>
+    <div class="mpesa-actions">
+      <button class="btn-cancel" id="cancelBtn">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// CSRF token helper
+function getCSRFToken() {
+    return document.querySelector('[name=csrfmiddlewaretoken]').value;
+}
+
+// Show/Hide M-Pesa card
+function showMpesaCard() {
+    document.getElementById("mpesaCard").style.display = "flex";
+}
+document.getElementById("cancelBtn").addEventListener("click", () => {
+    document.getElementById("mpesaCard").style.display = "none";
+});
+
+// Handle application fee payment
+document.getElementById("applyFeeBtn").addEventListener("click", async () => {
+    const fullName = document.querySelector('input[name="full_name"]').value;
+    const phone = document.querySelector('input[name="phone"]').value;
+    const feeCheckbox = document.getElementById("fee-confirm");
+
+    if (!fullName || !phone) {
+        alert("Please enter your full name and phone number.");
+        return;
+    }
+    if (!feeCheckbox.checked) {
+        alert("Please agree to pay the application fee.");
+        return;
+    }
+
+    showMpesaCard();
+
+    try {
+        const res = await fetch("/payments/stk-push/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": getCSRFToken()
+            },
+            body: JSON.stringify({ full_name: fullName, phone: phone })
+        });
+
+        const text = await res.text();
+        console.log("STK RESPONSE:", text);
+
+        if (!result.success) {
+            alert("Failed to initiate payment: " + JSON(text));
+            return;
+        }
+
+        if (!result.invoice_id) {
+            alert("Invoice ID missing from response.");
+            return;
+        }
+
+        pollPayment(result.invoice_id);
+
+    } catch (err) {
+        console.error("Error initiating payment:", err);
+        alert("Error starting payment. Check console.");
+    }
+});
+
+// Polling function for payment confirmation
+function pollPayment(invoiceId) {
+    const interval = setInterval(async () => {
+        const res = await fetch(`/payments/webhook-status/${invoiceId}/`);
+        const data = await res.json();
+        console.log("Polling status:", data);
+
+        if (data.paid) {
+            clearInterval(interval);
+            alert("Application fee paid successfully! You can now submit your loan.");
+
+            // Hide fee button + checkbox, show full loan form
+            document.getElementById("feeCheck").style.display = "none";
+            document.getElementById("applyFeeBtn").style.display = "none";
+            document.getElementById("mpesaCard").style.display = "none";
+            document.getElementById("loanDetails").style.display = "block";
+        }
+    }, 3000);
+}
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
