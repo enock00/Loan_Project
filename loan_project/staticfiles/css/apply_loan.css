@@ -1,0 +1,333 @@
+/* =========================
+   GLOBAL STYLES
+========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  background: #f5f8ff;
+  color: #1a1a1a;
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;   /* horizontal */
+  align-items: center;       /* vertical */
+}
+
+
+/* =========================
+   CONTAINER
+========================= */
+.loan-container {
+  width: 100%;
+  max-width: 1100px;
+  padding: 20px;
+
+  display: flex;
+  justify-content: center;
+}
+
+.form-wrapper {
+  background: #ffffff;
+  padding: 40px 30px;
+  border-radius: 16px;
+  box-shadow: 0 15px 40px rgba(0, 82, 255, 0.1);
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+}
+
+.form-wrapper h2 {
+  font-size: 2rem;
+  color: #1e40af;
+  margin-bottom: 10px;
+}
+
+.form-wrapper p {
+  color: #475569;
+  margin-bottom: 25px;
+}
+
+/* =========================
+   MESSAGES
+========================= */
+.messages {
+  margin-bottom: 15px;
+}
+
+.message {
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+}
+
+.message.error {
+  background: #ffe5e5;
+  color: #d32f2f;
+}
+
+.message.success {
+  background: #e6f4ea;
+  color: #388e3c;
+}
+
+/* =========================
+   FORM
+========================= */
+.form-group {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 500;
+  color: #334155;
+  margin-bottom: 8px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"] {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.3s;
+}
+
+.form-group input:focus {
+  border-color: #2563eb;
+}
+
+/* =========================
+   FEE CHECKBOX
+========================= */
+.fee-check {
+  font-size: 0.95rem;
+  color: #475569;
+}
+
+.fee-check input {
+  margin-right: 10px;
+}
+
+/* =========================
+   BUTTON
+========================= */
+.btn-primary {
+  display: inline-block;
+  width: 100%;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.btn-primary:hover {
+  background: #1e40af;
+  transform: translateY(-2px);
+}
+
+/* =========================
+   BACK LINK
+========================= */
+.back-login {
+  margin-top: 20px;
+  font-size: 0.95rem;
+}
+
+.back-login a {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.back-login a:hover {
+  text-decoration: underline;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  max-width: 400px;
+  text-align: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content h3 {
+  margin-bottom: 10px;
+}
+
+.modal-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-cancel {
+  background: #ccc;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-confirm {
+  background: #1e90ff;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-confirm:hover {
+  background: #187bcd;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Existing styles for form wrapper */
+
+.form-wrapper {
+  background: #fff;
+  padding: 35px 30px;
+  border-radius: 12px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 450px;
+}
+
+.form-wrapper h2 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+input, select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  outline: none;
+}
+
+input:focus, select:focus {
+  border-color: #1e90ff;
+}
+
+/* Buttons */
+.btn-primary, .btn-pay {
+  width: 100%;
+  padding: 12px;
+  background: #1e90ff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.btn-primary:hover, .btn-pay:hover {
+  background: #187bcd;
+}
+
+.btn-cancel {
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: #ccc;
+  border: none;
+  cursor: pointer;
+}
+
+.back-login {
+  text-align: center;
+  margin-top: 15px;
+}
+
+/* M-Pesa Card */
+.mpesa-card {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.mpesa-content {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+  animation: slideIn 0.3s ease;
+}
+
+.mpesa-content h3 {
+  margin-bottom: 15px;
+}
+
+.mpesa-content p {
+  margin-bottom: 15px;
+}
+
+.mpesa-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.mpesa-icon {
+  font-size: 50px;
+  color: #00b050;
+  margin-bottom: 10px;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-20px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 500px) {
+  .form-wrapper {
+    padding: 30px 20px;
+  }
+}
