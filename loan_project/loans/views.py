@@ -109,23 +109,17 @@ def apply_loan(request):
     return render(request, "loans/apply_loan.html")
 
 
-@login_required(login_url='login')
+@login_required
 def dashboard(request):
-    """
-    Dashboard view: shows user's loan status and amount
-    """
-    # Check if the user has a pending loan
-    has_pending = Loan.objects.filter(user=request.user, status="pending").exists()
-
-    # Get latest approved loan amount
-    approved_loan = Loan.objects.filter(user=request.user, status="approved").order_by("-created_at").first()
-    loan_amount = approved_loan.amount if approved_loan else 0
+    loans = Loan.objects.filter(user=request.user).order_by('-created_at')
 
     context = {
-        "has_pending": has_pending,
-        "loan_amount": loan_amount,
+        'loans': loans,
+        'total_loans': loans.count(),
+        'active_loans': loans.filter(status='approved').count(),
+        'has_pending': loans.filter(status='pending').exists(),
     }
-    return render(request, "dashboard.html", context)
+    return render(request, 'loans/dashboard.html', context)
 
 @login_required
 def update_loan_purpose(request, loan_id):
