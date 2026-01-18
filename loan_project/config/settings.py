@@ -13,7 +13,7 @@ environ.Env.read_env(BASE_DIR / ".env")
 
 SECRET_KEY = env("DJANGO_SECRET_KEY", default="django-insecure-dev-only-key")
 DEBUG = env("DEBUG", default=False)
-ALLOWED_HOSTS = env("ALLOWED_HOSTS", default="127.0.0.1,localhost,.vercel.app").split(",")
+ALLOWED_HOSTS = env("ALLOWED_HOSTS", default="127.0.0.1,localhost,.vercel.app,.herokuapp.com").split(",")
 
 
 DATABASES = {
