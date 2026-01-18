@@ -12,6 +12,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth import login as auth_login, authenticate
 
 
+
 def home(request):
     return render(request, 'loans/home.html')
 
@@ -149,3 +150,14 @@ def profile(request):
 def logout_view(request):
     logout(request)
     return redirect("login")
+
+
+def submit_loan(request):
+    if request.method == "POST":
+        
+        amount = request.POST.get("amount")
+
+        messages.success(request, "Loan submitted successfully")
+        return redirect("submit-loan")
+
+    return render(request, "loans/submit_loan.html")

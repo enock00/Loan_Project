@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Submit Loan</title>
+</head>
+<body>
+
+<h2>Submit Loan</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <label>Loan Amount</label>
+    <input type="number" name="amount" required>
+
+    <button type="submit">Submit</button>
+</form>
+
+</body>
+</html>
