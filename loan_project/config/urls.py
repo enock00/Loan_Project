@@ -22,6 +22,7 @@ from loans.views import home
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home'),
-    path('accounts/', include('loans.urls')),
+    path('accounts/', include('accounts.urls')),
     path('payments/', include('payments.urls')),
+    path('loans/', include('loans.urls')),
 ]
