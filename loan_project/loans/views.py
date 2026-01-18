@@ -70,7 +70,7 @@ def login_view(request):
 
         if user:
             auth_login(request, user)
-            return redirect("home")
+            return redirect("dashboard")
         else:
             messages.error(request, "Invalid credentials")
 

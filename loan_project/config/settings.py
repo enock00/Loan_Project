@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 import os
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -152,3 +153,17 @@ STATICFILES_STORAGE = (
 
 DEBUG = False
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "unsafe-dev-key")
+
+env = environ.Env(
+    DEBUG=(bool, False)  # Default False if not set
+)
+environ.Env.read_env()  # Reads the .env file
+
+# SECURITY
+SECRET_KEY = env('DJANGO_SECRET_KEY', default='django-insecure-dev-only-key')
+DEBUG = env('DEBUG')
+
+# DATABASE
+DATABASES = {
+    'default': env.db(),  # Automatically reads DATABASE_URL
+}
