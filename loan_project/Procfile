@@ -1,1 +1,1 @@
-web: gunicorn quickloan.wsgi --log-file -
+web: gunicorn config.wsgi
