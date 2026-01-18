@@ -38,7 +38,7 @@
   </div>
 
   <div class="loan-amount">
-    50,000
+    {{ loan_amount|floatformat:0 }}
   </div>
 
   <p class="reliable">
@@ -98,7 +98,7 @@
 
 <!-- ===== Bottom Navigation ===== -->
 <nav class="bottom-nav">
-  <a href="#" class="active">
+  <a href="{% url 'dashboard' %}" class="active">
     <i class="fa-solid fa-house"></i>
     <span>Home</span>
   </a>
@@ -116,6 +116,7 @@
 
 </body>
 </html>
+
 
 
 
