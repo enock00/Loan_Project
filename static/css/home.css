@@ -22,6 +22,14 @@ a {
 /* =========================
    NAVBAR
 ========================= */
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 14px 6%;
+    flex-wrap: wrap;
+  }
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -225,6 +233,7 @@ a {
   opacity: 0;
   animation: fadeInUp 1s ease forwards;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin: 0 auto;
 }
 
 .value-card:nth-child(1) { animation-delay: 0.8s; }
@@ -239,6 +248,13 @@ a {
 .value-card h4 {
   margin-bottom: 8px;
   color: #1e40af;
+}
+
+@media (max-width: 480px) {
+  .value-card {
+    width: 90%;
+    max-width: 320px;
+  }
 }
 
 /* FEATURES CARD */
