@@ -1,5 +1,6 @@
 from pathlib import Path
 import environ
+import os
 
 # -------------------------
 # Base directory
@@ -21,18 +22,20 @@ environ.Env.read_env(BASE_DIR / ".env")
 # -------------------------
 SECRET_KEY = env("DJANGO_SECRET_KEY", default="django-insecure-dev-only-key")
 DEBUG = env("DEBUG", default=False)
-ALLOWED_HOSTS = env(
-    "ALLOWED_HOSTS",
-    default="127.0.0.1,localhost,quickloan.herokuapp.com"
-).split(",")
+ALLOWED_HOSTS = ['*']
 
 # -------------------------
-# Database
+# DatabaseS
 # -------------------------
 DATABASES = {
-    "default": env.db(
-        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}"
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'HOST': os.environ.get('DB_HOST'),
+        'PORT': '5432',
+    }
 }
 
 # -------------------------
